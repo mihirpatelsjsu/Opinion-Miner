@@ -1,20 +1,14 @@
 pipeline {
-    agent { docker { image 'node:12-alpine' } }
+    agent { docker }
     stages {
         stage('build') {
             steps {
-                sh 'npm --version'
-                sh 'npm install'
+                sh 'docker stop $(docker ps -a -q)'
+		sh 'docker rm $(docker ps -a -q)'
+		sh 'docker rmi $(docker images | grep opinionminer)'
+		sh 'docker build . -t opinionminer'
+		sh 'docker run -p 3000:3000 -d opinionminer'
             }
-        }
-        stage('deploy') {
-        	steps {
-        		sh 'docker stop $(docker ps -a -q)'
-				sh 'docker rm $(docker ps -a -q)'
-				sh 'docker rmi $(docker images | grep opinionminer)'
-        		sh 'docker build . -t opinionminer'
-        		sh 'docker run -p 3000:3000 -d opinionminer'
-        	}
         }
     }
 }
