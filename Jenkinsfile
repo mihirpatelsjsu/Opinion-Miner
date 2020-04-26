@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'curl http://localhost:3000/'
+                sh 'npm --version'
+		sh 'ls'
             }
         }
     }
