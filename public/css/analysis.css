@@ -1,0 +1,116 @@
+body { 
+  background: #2A2E37;
+}
+
+nav a {
+  color: #00FEDE;
+}
+
+nav a:hover {
+  color: white;
+}
+
+.pie-chart-wrapper,
+.map-wrapper,
+.word-cloud-wrapper {
+  height: 100vh;
+}
+
+.header-wrapper {
+  position: relative;
+  display: flex;
+  height: 20vh;
+}
+
+.header {
+  margin: auto;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  color: #00FEDE;
+}
+
+.map-header-wrapper,
+.word-cloud-header-wrapper,
+.tweets-header-wrapper {
+  margin: 1% 0 0.5% 0;
+}
+
+.tweet {
+  margin: 1% 5%;
+  color: white;
+}
+
+.arc text {
+  text-anchor: middle;
+  font-size: large;
+  font-family: "Georgia, serif";
+}
+
+.pie-chart,
+.map,
+.word-cloud {
+    height: 75%;
+}
+
+.Map,
+.wordCloud {
+  height: 100%;
+  margin: 0 10%;
+}
+
+.wordCloud {
+  margin: 2% 15% 5%;
+}
+
+.arc path {
+  stroke: #fff;
+  stroke-width: 0.1%;
+}
+
+.toolTip {
+  position: absolute;
+  display: none;
+  width: auto;
+  height: auto;
+  background: none repeat scroll 0 0 white;
+  border: 0 none;
+  border-radius: 8px 8px 8px 8px;
+  box-shadow: -3px 3px 15px #888888;
+  color: black;
+  font: 12px sans-serif;
+  padding: 5px;
+  text-align: center;
+}
+
+.about .header-wrapper {
+  position: relative;
+  display: flex;
+  height: 100%;
+}
+
+.about .header {
+  color: #00FEDE;
+  margin: auto;
+  font-size: xx-large;
+  font-family: Georgia, serif;
+}
+
+.about {
+  height: 100vh;
+  color: white;
+  margin: 2% 5%;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: medium;
+  text-align: justify;
+}
+
+.instruction {
+  margin-top: 1%;
+}
+
+.about-heading {
+  color: #00FEDE;
+}
+
+.about .row {
+  width: 100%;
+}

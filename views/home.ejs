@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Links for Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="css/jquery-ui.structure.css">
+        <link rel="stylesheet" href="css/jquery-ui.theme.css">
+        
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/home.css">
+    </head>
+    <body>
+        <!-- Top Navigation Bar -->
+		<div data-aos="flip-up" data-aos-duration="2000">
+			<nav class="navbar navbar-expand-lg rounded">
+			  <a class="navbar-brand" href="#">Opinion Miner</a>
+			  <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://52.39.28.133:3000/logout">Log Out</a></li>
+              </ul>
+			</nav>
+        </div>
+        <div id="home" class="row home" data-aos="zoom-out">
+            <div class="search">
+                <input type="search" name="topic" placeholder="Enter Topic e.g. corona" class="search-box" />
+                    <span class="search-button">
+                        <span class="search-icon"></span>
+                    </span>   
+            </div>
+        </div>
+        <div id="about" class="about row">
+            <div class="col-3" data-aos="zoom-in-right">
+                <div class="header-wrapper">
+                    <div class="header">
+                        <span>About</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9" data-aos="fade-up-left">
+                <div class="row about-wrapper">
+                    <div class="col about">
+                        <div class="row">
+                            <span class="about-heading"> 
+                                Why?
+                            </span>
+                        </div>
+                        <div class="row">
+                            <span>
+                                Businesses want to know how their product is doing in the market.<br/>
+                                What are customers saying about them?<br/> 
+                                What are their expectations?<br/> 
+                                Hows the competition and what their customers think of their competition?<br/>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <span>
+                                People want to know what other people think and what they have to say about a topic or a product. <br/>
+                                What is trending today? <br/>
+                                What happened in the world today?<br/><br/>
+                                So here is the answer to all those questions......<br/><br/>
+                                <span class="about-heading"> 
+                                    What?<br/>
+                                </span>
+                                All it requires is a word and a will to know. Opinion Miner is a text classification project in which data from Twitter is obtained and analyzed so that businesses can make informed decisions and get real-time information about the opinions of their products. It can also be used by a normal person to get the latest information about a topic.<br/><br/>
+                                <span class="about-heading"> 
+                                    Why Twitter?<br/>
+                                </span>
+                                Twitter's relevance is now more than ever as people are tweeting about everything they See, Hear and Feel. Every second, on average, around 6,000 tweets are tweeted on Twitter, which corresponds to over 350,000 tweets sent per minute, 500 million tweets per day, and around 200 billion tweets per year. So it is the largest platform that gets opinions of people every second.<br/><br/>
+                                <span class="about-heading"> 
+                                    How?<br/>
+                                </span>
+                                Opinion miner uses Twitter's API to fetch tweets about a provided topic and extract relevant data. It uses Natural Language Processing to classify data and generate various visualizations.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="http://52.39.28.133:3000/tweets" method="POST"></form>
+        </form>
+    </body>
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+        duration: 1000
+        });
+    </script>
+
+    <script>
+
+    $('.search-button').click(function(){
+        if ($(this).parent().prop('className') != 'search open') {
+            console.log("open")
+            $(this).parent().toggleClass('open');
+        } else {
+            if ($("input").val().trim() != "") {
+                $('form').append($(".search-box"))
+                $('form').submit();
+            }
+        }
+    });
+    </script>
+</html>

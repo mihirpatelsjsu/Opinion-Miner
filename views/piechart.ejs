@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <!-- Links for Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/analysis.css"></link>
+  <link rel="stylesheet" href="../css/tab2.css"></link>
+</head>
+<style>
+
+</style>
+  <body>
+    <!-- Top Navigation Bar -->
+		<div data-aos="flip-up" data-aos-duration="2000">
+			<nav class="navbar navbar-expand-lg rounded">
+			  <a class="navbar-brand" href="http://52.39.28.133:3000/home">Opinion Miner</a>
+			  <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="#sentimentAnalyzer">Sentiment Analyzer</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tweetMap">Tweet Map</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tweetCloud">Tweet Cloud</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tweets">Tweets</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About Charts</a></li>
+          <li class="nav-item"><a class="nav-link" href="http://52.39.28.133:3000/logout">Log Out</a></li>
+        </ul>
+			</nav>
+    </div>
+    <div class="row pie-chart-wrapper" id="sentimentAnalyzer">
+      <div class="col">
+        <div class="row header-wrapper">
+          <div class="header pie-chart-header">
+            <h1>Sentiment Analyzer</h1>
+          </div>
+        </div>
+        <div class="row pie-chart">
+          <div class="col"></div>
+          <div class="col-3 chart1" id="chart1"></div>
+          <div class="col-3 chart2" id="chart2"></div>
+          <div class="col-3 chart3" id="chart3"></div>
+          <div class="col"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row map-wrapper" data-aos="fade-right" id="tweetMap">
+      <div class="col">
+        <div class="row header-wrapper map-header-wrapper">
+          <div class="header">
+            <h1>Tweet Map</h1>
+          </div>
+        </div>
+        <div class="row map">
+          <div class="col">
+            <div id="map" class="Map"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row word-cloud-wrapper" data-aos="zoom-in" id="tweetCloud">
+      <div class="col">
+        <div class="row header-wrapper word-cloud-header-wrapper">
+          <div class="header">
+            <h1>Tweet Cloud</h1>
+          </div>
+        </div>
+        <div class="row word-cloud">
+          <div class="col">
+            <div id="right" class="wordCloud"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+      topic
+      name
+      screen_name
+      time
+      tweet
+      retweet_count
+    -->
+      <div class="row tweets-wrapper" data-aos="zoom-out" id="tweets">
+        <div class="col">
+          <div class="row header-wrapper tweets-header-wrapper">
+            <div class="header">
+              <h1>
+                Tweets
+              </h1>
+            </div>
+          </div>
+          <div class="row tweet">
+            <div class="col">
+              <% for(var i=0; i < 5; i++) { %>
+                <div id="singletweet">
+                <div class="row">
+                    <div class="col" id="name">
+                        <%= tweets[i].name %>
+                    </div>
+                    <div class="col" id="screen_name">
+                        @<%= tweets[i].screen_name %>
+                    </div>
+                    <div class="col" id="time">
+                        <%= tweets[i].time %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" id="text">
+                        <%= tweets[i].tweet %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-1">
+                                <img src="../images/retweet.png" height="20px" width="25px">
+                            </div>
+                            <div class="col-1">
+                                <%= tweets[i].retweet_count %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="about" class="about row">
+        <div class="col-3" data-aos="zoom-in-right">
+            <div class="header-wrapper">
+                <div class="header">
+                    <span>About Charts</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-9" data-aos="fade-up-left">
+            <div class="row about-wrapper">
+                <div class="col about">
+                    <div class="row">
+                        <span class="about-heading"> 
+                          Sentiment Analyser:
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span>
+                          <span class="about-heading"> 
+                            Positive Chart:
+                          </span>
+                          <br/>It displays percent of positive tweets about a topic from all the tweets fetched so far. <br/><br/>
+                          <span class="about-heading"> 
+                            Negative Chart:
+                          </span>
+                          <br/>It displays percent of negative tweets about a topic from all the tweets fetched so far.<br/><br/>
+                          <span class="about-heading"> 
+                            Visibility Chart:
+                          </span>
+                          <br/>Visibility is how a topic is visible to the world depending on the tweets. Eg. If there are 2 tweets related to a topic. If 1 is positive and 1 is negative. Positive chart and Negative chart both will show 50% but if the tweeter(Narendra Modi) of the positive tweet has 56 Million followers and that of negative tweets (Jainish) has 56 followers (just exaggerating :)), so more people will see the positive side of the topic as Narendra Modi's tweet will reach to more people when compared to Jainish. Thus, the Visibility chart shows how the topic affects the world.
+                        </span>
+                    </div>
+                    <div class="row">
+                      <span class="about-heading"> 
+                        <br/><br/>TweetMap:
+                      </span>
+                    </div>
+                    <div class="row">
+                      TweetMap shows the locations of all the tweets for a particular topic on the world map.
+                    </div>
+                    <div class="row">
+                      <span class="about-heading"> 
+                        <br/><br/>TweetCloud:
+                      </span>
+                    </div>
+                    <div class="row">
+                      Generates a WORDCLOUD for the tweets fetched for a topic. WORDCLOUD is generated by hashtags used in those tweets. Hashtag with the highest frequency is displayed as the largest word in the TweetCloud and size decreases according to the frequency of hashtags for that topic.<br/><br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+
+  <!-- AOS animation-->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000
+    });
+  </script>
+
+</html>
+
+<script>
+
+  function createChart(eleClass, eleId, dataset, color, text){
+    
+    var div = d3.select(eleClass).append("div").attr("class", "toolTip");
+    
+    // Height and Width of chart
+    var width = document.getElementById(eleId).offsetWidth / 1.2,
+      height = document.getElementById(eleId).offsetHeight / 1.2,
+      radius = Math.min(width, height) / 2;
+  
+    // For hollow chart
+    var arc = d3.svg.arc()
+      .outerRadius(radius - 30)
+      .innerRadius(radius - 50);
+  
+    // Set start and end angle for chart
+    var pie = d3.layout.pie()
+      .sort(null)
+      .startAngle(2*Math.PI)
+      .endAngle(4*Math.PI)
+      .value(function(d) { return d.total; });
+  
+    var svg = d3.select(eleClass).append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    
+
+    var g = svg.selectAll(".arc")
+      .data(pie(dataset))
+      .enter().append("g")
+      .attr("class", "arc");
+  
+    // Change duration as per requirement
+    g.append("path")
+      .style("fill", function(d) {
+        return color(d.data.name);
+      })
+      .transition()
+      .delay(function(d,i) {
+        return i * 500;
+      })
+      .duration(1000)
+      .attrTween('d', function(d) {
+      var i = d3.interpolate(d.startAngle, d.endAngle);
+      return function(t) {
+        d.endAngle = i(t); 
+        return arc(d)
+      }
+    }); 
+  
+    //For adding texts on the parts of chart
+    // g.append("text")
+    //   .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+    //   .attr("dy", ".35em")
+    //   .transition()
+    //   .delay(1000)
+    //   .text(function(d) { return d.data.name; });
+  
+    // Text for center of chart
+    if (text == "") {
+      text = dataset[0].percent + "%";
+    } else {
+      text = text + " " + dataset[0].percent + "%";
+    }
+    g.append("text")
+      .attr('y', 5)
+      .attr('fill', '#00FEDE')
+      .attr('font-family', 'roboto')
+      .transition()
+      .delay(1000)
+      .text(text);
+  
+    d3.selectAll("path").on("mousemove", function(d) {
+      
+      // Get parent div position
+      var parentDiv = document.getElementById(eleId);
+      var position = parentDiv.getBoundingClientRect();
+      var l = position.left;
+      var t = position.top;
+  
+      // Get mouse co-ordinate
+      var x = d3.event.pageX;
+      var y = d3.event.pageY;
+      // console.log(div)
+      div.style("left", x-l+10+"px");
+      div.style("top", y-t-25+"px");
+      div.style("display", "inline-block");
+      div.html((d.data.name)+"<br>"+(d.data.total) + "<br>"+(d.data.percent) + "%");
+    });
+        
+    d3.selectAll("path").on("mouseout", function(d){
+      div.style("display", "none");
+    });
+  
+  }
+  
+  $(document).ready(function(){
+  
+    var p_tweets = parseInt("<%= positive_tweets %>");
+    var n_tweets = parseInt("<%= negative_tweets %>");
+    var p_visibility = parseInt("<%= positive_visibility %>");
+    var n_visibility = parseInt("<%= negative_visibility %>");
+    var p_tweets_locations = "<%= JSON.stringify(positive_tweets_locations) %>";
+    var n_tweets_locations = "<%= JSON.stringify(negative_tweets_locations) %>";
+    var wordcloud = "<%= JSON.stringify(wordcloud) %>";
+    
+    if (p_tweets_locations != ""){
+      p_tweets_locations = p_tweets_locations.replace(/&#34;/gi, "'")
+      p_tweets_locations = p_tweets_locations.replace(/\[+/g, "")
+      p_tweets_locations = p_tweets_locations.replace(/\]+/g, "")
+      p_tweets_locations = p_tweets_locations.replace(/\'+/g, "")
+      p_tweets_locations = p_tweets_locations.split(",")
+    }
+    
+    if (n_tweets_locations != "") {
+      n_tweets_locations = n_tweets_locations.replace(/&#34;/gi, "'")
+      n_tweets_locations = n_tweets_locations.replace(/\[+/g, "")
+      n_tweets_locations = n_tweets_locations.replace(/\]+/g, "")
+      n_tweets_locations = n_tweets_locations.replace(/\'+/g, "")
+      n_tweets_locations = n_tweets_locations.split(",")
+    }
+
+    if (wordcloud != ""){
+      wordcloud = wordcloud.replace(/&#34;/gi, "'")
+      wordcloud = wordcloud.replace(/\[+/g, "")
+      wordcloud = wordcloud.replace(/\]+/g, "")
+      wordcloud = wordcloud.replace(/\'+/g, "")
+      wordcloud = wordcloud.split(",")
+    }
+    
+    // Find sum of tweets and visibility
+    var sum_tweets = p_tweets + n_tweets;
+    var sum_visibility = p_visibility + n_visibility;
+  
+    var p_tweets_percent = Math.round((p_tweets /sum_tweets) * 100);
+    var n_tweets_percent = Math.round((n_tweets /sum_tweets) * 100);
+    var p_visibility_percent = Math.round((p_visibility /sum_visibility) * 100);
+    var n_visibility_percent = Math.round((n_visibility /sum_visibility) * 100);
+  
+    // Dataset for pie chart
+    var dataset1 = [
+      { name: 'Positive', total: p_tweets, percent: p_tweets_percent },
+      { name: 'Negative', total: n_tweets, percent: n_tweets_percent }
+    ];
+  
+    var dataset2 = [
+      { name: 'Negative', total: n_tweets, percent: n_tweets_percent },
+      { name: 'Positive', total: p_tweets, percent: p_tweets_percent }
+    ];
+  
+    var dataset3 = [
+      { name: 'Positive', total: p_visibility, percent: p_visibility_percent },
+      { name: 'Negative', total: n_visibility, percent: n_visibility_percent }
+    ];
+  
+    // Color for different parts of pie chart
+    var color1 = d3.scale.ordinal()
+        .range(["#32CD32", "#434343"]);
+  
+    var color2 = d3.scale.ordinal()
+        .range(["#FF0000", "#434343"]);  
+  
+    var color3 = d3.scale.ordinal()
+        .range(["#32CD32", "#FF0000"]);    
+  
+    createChart('.chart1', 'chart1', dataset1, color1, "");
+    createChart('.chart2', 'chart2', dataset2, color2, "");
+    createChart('.chart3', 'chart3', dataset3, color3, "Visibility");
+  
+    // Load Google maps api
+    var script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAXWCI5f1-e6DpiCVMaw-GwUEipY1T8FIY&callback=initMap';
+    script.defer = true;
+    script.async = true;
+  
+    // Attach initMap to initialize the map
+    window.initMap = function() {
+  
+      // usa location
+      var usa = {lat: 40.052059, lng: -86.470642};
+      // The map, centered at usa
+      var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 3, center: usa});
+      
+      var marker;  
+
+      // Add markers for positive tweet locations    
+      for (var i=0; i<p_tweets_locations.length; i=i+3) {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(p_tweets_locations[i+1], p_tweets_locations[i+2]),
+          animation: google.maps.Animation.DROP,
+          map: map,
+          icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+          }
+        });
+      }
+  
+      // Add markers for negative tweet locations
+      for (var i=0; i<n_tweets_locations.length; i++) {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(n_tweets_locations[i+1], n_tweets_locations[i+2]),
+          animation: google.maps.Animation.DROP,
+          map: map,
+          icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+          }
+        });
+      }
+    };
+  
+  // Append the 'script' element to 'head'
+  document.head.appendChild(script);
+    
+  // List of words
+  var myWords = new Array();
+  var sum_myWords = 0;
+  for (let i=0; i<wordcloud.length; i=i+2){
+    sum_myWords += parseInt(wordcloud[i+1])
+  }
+  for (let i=0; i<wordcloud.length; i=i+2){
+    myWords.push({word: wordcloud[i], size: wordcloud[i+1]})
+  }
+
+  // set the dimensions and margins of the graph
+  var margin = {top: 10, right: 10, bottom: 10, left: 10},
+    width = document.getElementById("right").offsetWidth - margin.left - margin.right,
+    height = document.getElementById("right").offsetHeight - margin.top - margin.bottom;
+
+  var wordcloud_color = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+                        '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+                        '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+                        '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
+                        '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
+                        '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
+                        '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
+                        '#4D8066', '#809980', '#1AFF33', '#999933',
+                        '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
+                        '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+
+  
+d3.layout.cloud()
+  .size([width, height])
+  .words(myWords.map(function(d) { return {text: d.word, size:d.size}; }))
+  .padding(5)
+  .rotate(function() { return ~~(Math.random() * 0) * 90; })
+  .font("Impact")
+  .fontSize(function(d) { return d.size + "1"; })
+  .on("end", draw)
+  .start();
+      
+
+// This function takes the output of 'layout' above and draw the words
+// Wordcloud features that are THE SAME from one word to the other can be here
+function draw(words) {
+    d3.select("#right").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("transform", "translate(500,250)")
+      .selectAll("text")
+      .data(words)
+      .enter().append("text")
+      .style("font-size", function(d) { return (d.size); })
+      .style("font-family", "Impact")
+      .attr("fill", function() { return wordcloud_color[Math.floor(Math.random()*wordcloud_color.length)]; })
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+    })
+    .text(function(d) { return d.text; });
+  }
+});
+
+</script>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="../js/d3.layout.cloud.js"></script>

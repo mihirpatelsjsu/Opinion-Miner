@@ -1,0 +1,30 @@
+<html>
+    <title>
+        Sign UP
+    </title>
+    <head>
+        <link rel="stylesheet" href="css/SignUp.css">
+        <script type="text/javascript" src="js/validation.js"></script>
+    </head>
+    <body>
+        <div class="main">
+        <h2>Sign Up!</h2>
+        <form onsubmit="return formValidation(this)">
+            <div class="container">
+                <label><b>Username</b></label>
+                <input type="text", placeholder="Enter Username" name="username">
+
+                <label><b>Password</b></label>
+                <input type="password", placeholder="Enter Password" name="password">
+                <div class="buttons">
+                    <button type="submit">Sign Up</button>
+                    <button type="submit" class="login">Login</button>
+                </div>
+            </div>
+        </form>
+        <div>
+            <p id="error"></p>
+        </div>
+    </div>
+    </body>
+</html>

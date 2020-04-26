@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="css/jquery-ui.structure.css">
+        <link rel="stylesheet" href="css/jquery-ui.theme.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/home.css">
+        <title>
+            Tweets
+        </title>
+    </head>
+    <body>
+        <div class="row">
+            <div id="tabs">
+                <ul>
+                    <li>
+                        <a href="tabs/tab2.ejs">Trending in twitter</a>
+                    </li>
+                    <li>
+                        <a href="tabs/tab1.html">Charts</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        $("#tabs").tabs();
+        $(document).ready(function(){
+            $("#tabs").css("display", "block");
+
+            $.each(tweets, function(data){
+                console.log(data);
+            });
+
+        });
+    </script>
+</html>
