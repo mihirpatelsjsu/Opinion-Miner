@@ -1,13 +1,9 @@
 pipeline {
-	agent { docker {image: 'dind'} }
+	agent { dockerfile true }
     stages {
         stage('build') {
             steps {
-                sh 'docker stop $(docker ps -a -q)'
-		sh 'docker rm $(docker ps -a -q)'
-		sh 'docker rmi $(docker images | grep opinionminer)'
-		sh 'docker build . -t opinionminer'
-		sh 'docker run -p 3000:3000 -d opinionminer'
+                sh 'curl http://localhost:3000/'
             }
         }
     }
