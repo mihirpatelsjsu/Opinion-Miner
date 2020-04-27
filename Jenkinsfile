@@ -2,9 +2,12 @@ pipeline {
 	agent { dockerfile true }
     stages {
         stage('build') {
+		agent {
+			image: docker
+		}
             steps {
-                sh 'npm --version'
-		sh 'ls'
+                sh 'docker version'
+		sh 'docker images'
             }
         }
     }
