@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
         	agent {
-        		docker { image: 'docker:19.03.8' }
+        		docker { image 'docker' }
         	}
             steps {
                 sh 'docker version'
