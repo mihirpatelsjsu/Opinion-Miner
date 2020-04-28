@@ -13,7 +13,7 @@ function get_request(req,res){
     var topic = req.params.query;
 
     Tweet.find({ topic: topic }).then((doc) => {
-            console.log("success" + doc)
+            // console.log("success" + doc)
             res.writeHead(200, {
                 "Content-Type": "text/plain"
             });
@@ -124,7 +124,7 @@ function post_request(req,res){
             });
       
           tweet.save().then(docu => {
-            console.log("Tweet added successfully" + docu)
+            // console.log("Tweet added successfully" + docu)
             // var responseObject = {
             //   "topic": req.body.topic,
             //   "hashtags": hashtag_array,
@@ -156,7 +156,7 @@ function delete_request(req,res){
   Tweet.findOne({topic : topic}).then(doc => {
     if(doc){
       Tweet.findOneAndDelete(topic).then(response => {
-        console.log("Deleted" + response)
+        // console.log("Deleted" + response)
         res.redirect('/home')
       }).catch(e => {
         console.log("Error in Deletion")
@@ -201,7 +201,7 @@ function get_trends(req,res){
     }
 
     T.get('trends/place', params).then(response => {
-      console.log("params: " + params.id);
+      // console.log("params: " + params.id);
       var trends_length = response[0].trends.length; 
       // console.log("trends fetched : " + trends_length);
         var trendsArray = [];

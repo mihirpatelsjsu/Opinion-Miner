@@ -16,14 +16,16 @@
     <!-- Top Navigation Bar -->
 		<div data-aos="flip-up" data-aos-duration="2000">
 			<nav class="navbar navbar-expand-lg rounded">
-			  <a class="navbar-brand" href="http://54.245.5.117:3000/home">Opinion Miner</a>
+        <!-- <a class="navbar-brand" href="http://52.39.28.133:3000/home">Opinion Miner</a> -->
+        <a class="navbar-brand" href="http://localhost:3000/home">Opinion Miner</a>
 			  <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a class="nav-link" href="#sentimentAnalyzer">Sentiment Analyzer</a></li>
           <li class="nav-item"><a class="nav-link" href="#tweetMap">Tweet Map</a></li>
           <li class="nav-item"><a class="nav-link" href="#tweetCloud">Tweet Cloud</a></li>
           <li class="nav-item"><a class="nav-link" href="#tweets">Tweets</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">About Charts</a></li>
-          <li class="nav-item"><a class="nav-link" href="http://54.245.5.117:3000/logout">Log Out</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="http://52.39.28.133:3000/logout">Log Out</a></li> -->
+          <li class="nav-item"><a class="nav-link" href="http://localhost:3000/logout">Log Out</a></li>
         </ul>
 			</nav>
     </div>
@@ -31,7 +33,7 @@
       <div class="col">
         <div class="row header-wrapper">
           <div class="header pie-chart-header">
-            <h1>Sentiment Analyzer</h1>
+            <h1>Sentiment Analyzer for <%= topic %></h1>
           </div>
         </div>
         <div class="row pie-chart">

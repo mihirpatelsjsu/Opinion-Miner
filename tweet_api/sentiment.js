@@ -91,7 +91,8 @@ function sentiment_analysis(req, res, cities){
                                     "negative_tweets_locations" : negative_tweets_locations,
                                     "wordcloud" : wordcloud_array,
                                     "topic" : topic,
-                                    "tweets" : data})
+                                    "tweets" : data,
+                                    "topic": topic})
             
         }).catch((err) => {
             console.log(err);
