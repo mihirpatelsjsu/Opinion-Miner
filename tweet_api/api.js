@@ -6,6 +6,7 @@ var express = require("express");
 var app = express();
 var mongoose = require('./db_connection');
 var Tweet = require('./models/twitter');
+var user = require('./models/user');
 var sent = require('./sentiment');
 
 //get method
@@ -221,6 +222,45 @@ function get_trends(req,res){
       })
 }
 
+function storeUser(username, password, req, res) {
+  user.find({ username: username }).then((doc) => {
+    if (doc.length > 0) {
+      return res.render('login', {error: "Usernaeme already exists", dynamicLoad: "Sign Up"});
+    } else {
+      var User = new user({
+        username: username,
+        password: password
+      });
+      User.save().then(docu => {
+        res.redirect("/login");
+      }).catch(e => {
+        console.log(e);
+        return "error"
+      });
+    }
+  });
+}
+
+function getUser(username, password, req, res) {
+  user.find({ username: username }).then((doc) => {
+    if (doc.length > 0) {
+      if (doc[0].password == password) {
+        req.session.user = {username: username}; 
+        res.cookie('user', 'user');
+        res.redirect('/home');
+      } else {
+        res.render("login", {error: "Username or Password is incorrect", dynamicLoad: "Login"})
+      }
+    } else {
+      res.render("login", {error: "Username or Password is incorrect", dynamicLoad: "Login"})
+    }
+  }).catch((err) => {
+      console.log(err);
+      console.log("Inside 400 response")
+      res.end("error");
+  });
+}
+
 //analysis
 function analysis(req,res,cities){
     sent.sentiment_analysis(req,res,cities);
@@ -232,5 +272,7 @@ module.exports = {
     post_request: post_request,
     delete_request: delete_request,
     analysis: analysis,
-    get_trends: get_trends    
+    get_trends: get_trends,
+    storeUser: storeUser,
+    getUser: getUser    
 }

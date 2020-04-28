@@ -66,22 +66,25 @@ app.get("/", sessionChecker, function (req, res) {
 
 app.route('/login')
   .get(sessionChecker, (req, res) => {
-      res.render("login");
+      res.render("login", {error: "", dynamicLoad: "Login"});
   })
   .post((req, res) => {
     var username = req.body.username,
         password = req.body.password;
-    Users.filter(function (user) {
-      if (user.username != username) {
-        res.redirect('/login');
-      } else if (user.password != password) {
-        res.redirect('/login');
-      } else {
-        req.session.user = user; 
-        res.cookie('user', 'user');
-        res.redirect('/home');
-      }
-  });
+    api.getUser(username, password, req, res);
+    
+    // var found = Users.find(element => element.username == username);
+    // if (typeof found !=  "undefined") {
+    //   if (found.password == password) {
+    //     req.session.user = found; 
+    //     res.cookie('user', 'user');
+    //     res.redirect('/home');
+    //   } else {
+    //     res.render("login", {error: "Username or Password is incorrect", dynamicLoad: "Login"})
+    //   }
+    // } else {
+    //   res.render("login", {error: "Username or Password is incorrect", dynamicLoad: "Login"})
+    // }
 });
 
 app.get('/home', (req, res) => {
@@ -103,7 +106,32 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
-  return res.render('SignUp');
+  return res.render('login', {error: "", dynamicLoad: "Sign Up"});
+});
+
+app.post('/signup', (req, res) => {
+  // var found = Users.find(element => element.username == req.body.username);
+  // if (typeof found == "undefined") {
+    //   if (store == "stored") {
+    //     console.log("stored")
+    //     res.redirect("/login");
+    //   } else {
+    //     return "error"
+    //   }
+    // })
+    // console.log(store)
+    
+  //   Users.push({
+  //     username: req.body.username,
+  //     password: req.body.password
+  //   });
+  //   res.redirect("/login");
+  // } else {
+  //   return res.render('login', {error: "Usernaeme already exists", dynamicLoad: "Sign Up"});
+  // }
+  
+  api.storeUser(req.body.username, req.body.password, req, res)
+
 });
 
 //get from database

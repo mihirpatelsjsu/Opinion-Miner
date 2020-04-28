@@ -6,6 +6,11 @@
     background-color: #2A2E37;
 }
 
+/* .show-login,
+.show-signup {
+    display: none;
+} */
+
 .header-wrapper {
     height: 100%;
     position: relative;
@@ -19,13 +24,15 @@
     font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
-.login-wrapper {
+.login-wrapper,
+.signup-wrapper {
     height: 100%;
     position: relative;
     display: flex;
 }
 
-.login {
+.login,
+.signup {
     font-family: Verdana, Geneva, sans-serif;
     margin: auto;
 }
@@ -50,6 +57,10 @@ input[type=password] {
     color: white;
     width: 100%;
     height: 56px;
+}
+
+.button:hover {
+    background-color: grey;
 }
 
 p {

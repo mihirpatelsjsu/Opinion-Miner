@@ -1,6 +1,6 @@
 <html>
     <title>
-        Login
+        <%= dynamicLoad %>
     </title>
     <head>
         <!-- Links for Bootstrap -->
@@ -16,25 +16,30 @@
             <div class="col-7 left-pane" data-aos="fade-right">
                 <div class="header-wrapper">
                     <div class="header">
-                        <span>Opinion Miner v1</span>
+                        <span>Opinion Miner</span>
                     </div>
                 </div>
             </div>
-            <div class="col-5" data-aos="zoom-in">
+            <div class="col-5" data-aos="zoom-in" class="show-login">
                 <div class="login-wrapper">
                     <div class="login">
                         <div class="main">
-                            <h2>Login</h2>
-                            <form action="http://54.245.5.117:3000/login" onsubmit="return formValidation(this)" method="POST">
-                            <!-- <form action="http://localhost:3000/login" onsubmit="return formValidation(this)" method="POST"> -->
+                            <h2></h2>
+                            <!-- <form action="http://54.245.5.117:3000/login" onsubmit="return formValidation(this)" method="POST"> -->
+                            <form name="show-form" onsubmit="return formValidation(this)" method="POST">
                                 <input type="text", placeholder="Username" name="username">
                                 <input type="password", placeholder="Password" name="password">
                                 <div class="buttons">
-                                    <button type="submit" class="btn btn-success button">Login</button>
+                                    <button type="submit" class="btn button button-1"></button>
                                 </div>
                             </form>
+                            <form name="server-call" method="GET">
+                                <button type="submit" class="btn button button-2"></button>
+                            </form>
                             <div>
-                                <p id="error"></p>
+                                <p id="error">
+                                    <%= error %>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -49,6 +54,28 @@
         AOS.init({
         duration: 1100
         });
+
+        
+
+        $(document).ready(function() {
+            var dynamicLoad = "<%= dynamicLoad %>"
+            console.log(dynamicLoad)
+            if (dynamicLoad === "Login") {
+                $('h2').html("Login");
+                $('form[name="show-form"]').attr("action", "http://localhost:3000/login");
+                $('form[name="server-call"]').attr("action", "http://localhost:3000/signup");
+                $(".button-1").html("Login");
+                $(".button-2").html("Sign Up");
+            } else {
+                console.log("else")
+                $('h2').html("Sign Up");
+                $('form[name="server-call"]').attr("action", "http://localhost:3000/login");
+                $('form[name="show-form"]').attr("action", "http://localhost:3000/signup");
+                $(".button-2").html("Login");
+                $(".button-1").html("Sign Up");
+            }
+        });
+
     </script>
 
 </html>

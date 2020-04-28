@@ -6,6 +6,4 @@ mongoose.connect('mongodb+srv://Jainish:jainish@cluster0-beood.mongodb.net/cmpe2
     useUnifiedTopology: true
 });
 
-
-
 module.exports = {mongoose};
