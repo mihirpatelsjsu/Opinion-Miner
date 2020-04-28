@@ -129,7 +129,7 @@ app.post('/signup', (req, res) => {
   // } else {
   //   return res.render('login', {error: "Usernaeme already exists", dynamicLoad: "Sign Up"});
   // }
-  
+  // console.log(req.body.username, req.body.password)
   api.storeUser(req.body.username, req.body.password, req, res)
 
 });

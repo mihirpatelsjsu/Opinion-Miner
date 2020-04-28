@@ -225,7 +225,6 @@ function get_trends(req,res){
 function storeUser(username, password, req, res) {
   user.find({ username: username }).then((doc) => {
     if (doc.length > 0) {
-      console.log(doc);
       return res.render('login', {error: "Usernaeme already exists", dynamicLoad: "Sign Up"});
     } else {
       var User = new user({
@@ -233,7 +232,6 @@ function storeUser(username, password, req, res) {
         password: password
       });
       User.save().then(docu => {
-        console.log(docu);
         res.redirect("/login");
       }).catch(e => {
         console.log(e);
