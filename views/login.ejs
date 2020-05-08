@@ -13,14 +13,14 @@
     </head>
     <body>
         <div class="row">
-            <div class="col-7 left-pane" data-aos="fade-right">
+            <div class="col-7 left-pane">
                 <div class="header-wrapper">
                     <div class="header">
                         <span>Opinion Miner</span>
                     </div>
                 </div>
             </div>
-            <div class="col-5" data-aos="zoom-in" class="show-login">
+            <div class="col-5" class="show-login">
                 <div class="login-wrapper">
                     <div class="login">
                         <div class="main">
@@ -62,19 +62,19 @@
             console.log(dynamicLoad)
             if (dynamicLoad === "Login") {
                 $('h2').html("Login");
-                // $('form[name="show-form"]').attr("action", "http://localhost:3000/login");
-                // $('form[name="server-call"]').attr("action", "http://localhost:3000/signup");
-                $('form[name="show-form"]').attr("action", "http://35.166.29.253:3000/login");
-                $('form[name="server-call"]').attr("action", "http://35.166.29.253:3000/signup");
+                $('form[name="show-form"]').attr("action", "http://localhost:3000/login");
+                $('form[name="server-call"]').attr("action", "http://localhost:3000/signup");
+                // $('form[name="show-form"]').attr("action", "http://35.166.29.253:3000/login");
+                // $('form[name="server-call"]').attr("action", "http://35.166.29.253:3000/signup");
                 $(".button-1").html("Login");
                 $(".button-2").html("Sign Up");
             } else {
                 console.log("else")
                 $('h2').html("Sign Up");
-                // $('form[name="server-call"]').attr("action", "http://localhost:3000/login");
-                // $('form[name="show-form"]').attr("action", "http://localhost:3000/signup");
-                $('form[name="server-call"]').attr("action", "http://35.166.29.253:3000/login");
-                $('form[name="show-form"]').attr("action", "http://35.166.29.253:3000/signup");
+                $('form[name="server-call"]').attr("action", "http://localhost:3000/login");
+                $('form[name="show-form"]').attr("action", "http://localhost:3000/signup");
+                // $('form[name="server-call"]').attr("action", "http://35.166.29.253:3000/login");
+                // $('form[name="show-form"]').attr("action", "http://35.166.29.253:3000/signup");
                 $(".button-2").html("Login");
                 $(".button-1").html("Sign Up");
             }
