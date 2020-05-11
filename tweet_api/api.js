@@ -131,6 +131,7 @@ function post_request(req,res){
             //   "hashtags": hashtag_array,
             //   "tweets": tweetsArray
             // }
+            // console.log("document: "+docu);
             res.redirect("/analysis/"+topic);
             // res.render("tab2", {res: responseObject});
           }).catch(e => {
@@ -182,44 +183,92 @@ function delete_request(req,res){
 
 }
 
+// //trends
+// function get_trends(req,res){
+//   var woeid = new Object();
+//   woeid["World"] = 1;
+//   woeid["India"] = 23424848;
+//   woeid["USA"] = 23424977;
+//   woeid["UK"] = 23424975;
+//   woeid["Canada"] = 23424775;
+//   woeid["Australia"] = 23424748;
+//   if(req.params.place in woeid){
+//   var query_id = woeid[req.params.place];
+//   }else{
+//     var query_id = 1
+//   }
+
+//   const params = {
+//       id: query_id
+//     }
+
+//     T.get('trends/place', params).then(response => {
+//       // console.log("params: " + params.id);
+//       var trends_length = response[0].trends.length; 
+//       // console.log("trends fetched : " + trends_length);
+//         var trendsArray = [];
+//         for(let i=0;i<trends_length;i++){
+//          if(response[0].trends[i].tweet_volume != null){  
+//          trendsArray.push({name:response[0].trends[i].name, volume:response[0].trends[i].tweet_volume})
+//         // trendsArray.push([response[0].trends[i].name, response[0].trends[i].tweet_volume])
+//          }
+//         }
+        
+//         // var result = (trendsArray.sort((a,b) => b.volume-a.volume)).slice(0,15)
+//         var result = trendsArray.slice(0,15);
+//         var out = new Array();
+//         result.forEach(element => {
+//           out.push([element.name, element.volume])
+//         });
+//         console.log(out);
+//         res.render("home", {"topics" : out});
+//       })
+// }
+
 //trends
-function get_trends(req,res){
-  var woeid = new Object();
-  woeid["World"] = 1;
-  woeid["India"] = 23424848;
-  woeid["USA"] = 23424977;
-  woeid["UK"] = 23424975;
-  woeid["Canada"] = 23424775;
-  woeid["Australia"] = 23424748;
-  if(req.params.place in woeid){
-  var query_id = woeid[req.params.place];
-  }else{
-    var query_id = 1
+function get_trends ( req, res, callback ) {
+  // console.log("get_trends")
+  var woeid_arr = [ 1, 23424848, 23424977, 23424975, 23424775 ]
+  var loc_arr = [ "WORLD", "INDIA", "USA", "UK", "CANADA" ]
+  trendsObject = new Object()
+
+  trend_by_place( trendsObject, woeid_arr, loc_arr, 0, callback )
+  // return trendsObject;
+}
+
+function trend_by_place ( trendsObject, woeid_arr, loc_arr, ind, callback ) {
+  // console.log("trend_by_place")
+  if( ind > 4 ) {
+    callback( trendsObject )
+  } else {
+    const params = {
+      id: woeid_arr[ ind ],
+      exclude: "hashtags"
+    }
+    var trendsArray = []
+    T.get( 'trends/place', params ).then( response => {
+      var trends_length = response[ 0 ].trends.length;
+
+      for( let i = 0; i < trends_length; i++ ) {
+        if( response[ 0 ].trends[ i ].tweet_volume != null ) {
+          trendsArray.push( {name: response[ 0 ].trends[ i ].name, volume: response[ 0 ].trends[ i ].tweet_volume} )
+        }
+      }
+      var result = ( trendsArray.sort( ( a, b ) => b.volume - a.volume ) ).slice( 0, 10 )
+      // var result = trendsArray.slice(0,10);
+
+      trendsObject[ loc_arr[ ind ] ] = result
+
+      trend_by_place( trendsObject, woeid_arr, loc_arr, ind + 1, callback )
+    } ).catch(e => {
+      console.log("Error in finding one")
+      // res.writeHead(400, {
+      //   "Content-Type": "text/plain"
+      // });
+      // res.end("internal sserver error");
+    })
   }
 
-  const params = {
-      id: query_id
-    }
-
-    T.get('trends/place', params).then(response => {
-      // console.log("params: " + params.id);
-      var trends_length = response[0].trends.length; 
-      // console.log("trends fetched : " + trends_length);
-        var trendsArray = [];
-        for(let i=0;i<trends_length;i++){
-         if(response[0].trends[i].tweet_volume != null){  
-         trendsArray.push({name:response[0].trends[i].name, volume:response[0].trends[i].tweet_volume})
-         }
-        }
-        
-        var result = (trendsArray.sort((a,b) => b.volume-a.volume)).slice(0,5)
-        var out = new Array();
-        result.forEach(element => {
-          out.push(element.name)
-        });
-        res.render("home", {username : req.session.user.username,
-                            trending_topics : out});
-      })
 }
 
 function storeUser(username, password, req, res) {

@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 var session = require("express-session");
 var cookieParser = require("cookie-parser");
 var api = require('./tweet_api/api');
+var set_trends = null;
 
 //
 app.set("view engine", "ejs");
@@ -90,7 +91,16 @@ app.route('/login')
 app.get('/home', (req, res) => {
   if (req.session.user && req.cookies.user) {
     // api.get_trends(req, res); 
-    res.render("home"); 
+    // res.render("home"); 
+    if (set_trends == null) {
+      api.get_trends( req, res, ( trends ) => {
+        // console.log( trends )
+        set_trends = trends
+        res.render( "home", {"topics": JSON.stringify(trends) })
+      } );
+    } else {
+      res.render( "home", {"topics": JSON.stringify(set_trends) })
+    } 
   } else {
       res.redirect('/login');
   }
