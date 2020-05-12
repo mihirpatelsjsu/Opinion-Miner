@@ -10,10 +10,6 @@ body {
   height: 100vh;
 }
 
-nav {
-  /* border-bottom: 0.5px solid #00FE78; */
-}
-
 nav a {
   color: #00FEDE;  
 }
@@ -23,13 +19,55 @@ nav a:hover {
   border-bottom: 1px solid #00FEDE;
 }
 
-#home {
-  margin-top: 5%;
-  height: 35%;
+.home {
+  margin: 2% 5%;
+  height: 20%;
+  border-bottom: 1px solid black;
+}
+
+.instruction-line-wrapper {
+  width: 100%;
+  color: #00FEDE;
+  margin: 1% 0 5%;
+  position: relative;
+  display: flex;
+}
+
+.instruction-line {
+  margin: auto;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.search-wrapper {
+  margin-bottom: 2%
 }
 
 #about {
   height: 100vh;
+}
+
+.select-buttons-wrapper {
+  position: relative;
+  display: flex;
+  height: 100%;
+  margin-left: 50%;
+}
+
+.select-buttons {
+  margin: auto;
+}
+
+.select-buttons button {
+  margin: 5% 0;
+  width: 100%;
+  background-color: #242628;
+  color: #00FEDE;
+  border: 1px solid #00FEDE;
+}
+
+.select-buttons button:hover {
+  background-color: #2A2E37;
+  border: 1px solid #00FEDE;
 }
 
 .header-wrapper {
@@ -45,42 +83,16 @@ nav a:hover {
   font-family: Georgia, serif;
 }
 
-.slider-wrapper {
-  height: 100%;
-}
-
-.slider-header {
-  margin: 1% 10% 0;
-  color: #00FEDE;
-}
-
-.slider {
-  margin: 0 10%;
-  /* width: 100%; */
-  height: 10%;
-  position: relative;
-}
-
-#slider {
-  position: absolute;
-  height: 30%;
-  width: 100%;
-  text-align: center;
-  top: 50%;
-  -webkit-transform: translate(0, -50%);
-  transform: translate(0, -50%);
-  background-color: black;
-}
-
-.line-chart-wrapper {
+.bar-chart-wrapper {
   margin-top: 2%;
-  height: 35%;
+  height: 45%;
   width: 100%;
+  position: relative;
+  display: flex;
 }
 
-#line-chart {
+.bar-chart {
   height: 100%;
-  width: 100%;
 }
 
 #custom-handle {
@@ -110,14 +122,6 @@ nav a:hover {
   fill: #00FEDE;
 }
 
-#line-chart-1,
-#line-chart-2,
-#line-chart-3,
-#line-chart-4,
-#line-chart-5 {
-  margin-left: 2%;
-}
-
 .trends-heading h3{
   margin-top: 2%;
   width: 100%;
@@ -128,7 +132,7 @@ nav a:hover {
 .search {
   width: 100px;
   height: 100px;
-  margin: 3% auto 0;
+  margin: 0 auto;
   background-color: #242628;
   position: relative;
   overflow: hidden;
@@ -146,7 +150,7 @@ nav a:hover {
 }
 
 .search.open {
-  width: 500px;
+  width: 600px;
 }
 
 .search.open:before {

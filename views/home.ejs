@@ -6,21 +6,13 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-        <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
-        <!-- <link rel="stylesheet" href="css/jquery-ui.css">
-        <link rel="stylesheet" href="css/jquery-ui.structure.css">
-        <link rel="stylesheet" href="css/jquery-ui.theme.css"> -->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.4/jquery-ui.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="css/home.css">
-        <!-- D3 Js link -->
-        
-        <!-- <script src="../js/d3.layout.cloud.js"></script> -->
     </head>
     <body>
         <!-- Top Navigation Bar -->
@@ -37,35 +29,42 @@
               </ul>
 			</nav>
         </div>
-        <!-- <div class="row slider-header">
-            <span>Select number of tweets to analyze</span>
-        </div> -->
-        <!-- <div class="row slider">
-            <div id="slider">
-                <div id="custom-handle" class="ui-slider-handle"></div>
+        <div class="row home">
+            <div class="search">
+                <input type="search" name="topic" placeholder="Enter Topic e.g. corona" class="search-box" />
+                    <span class="search-button">
+                        <span class="search-icon"></span>
+                    </span>   
             </div>
-        </div> -->
-        <div id="home" class="row home">
-            <div class="col" id="line-chart-1"></div>
-            <div class="col">
-                <div class="row">
-                    <div class="search">
-                        <input type="search" name="topic" placeholder="Enter Topic e.g. corona" class="search-box" />
-                            <span class="search-button">
-                                <span class="search-icon"></span>
-                            </span>   
+        </div>
+        <div class="row instruction-line-wrapper">
+            <div class="instruction-line">
+                <h5>Click on any of the trends to analyze it from the chart</h5>
+            </div>
+        </div>
+        <div class="row bar-chart-wrapper">
+            <div class="col-3">
+                <div class="row select-buttons-wrapper">
+                    <div class="select-buttons">
+                        <div class="row">
+                            <button type="button" class="btn btn-primary" value="world">World</button>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn btn-primary" value="usa">USA</button>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn btn-primary" value="india">India</button>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn btn-primary" value="uk">UK</button>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn btn-primary" value="canada">Canada</button>
+                        </div>
                     </div>
                 </div>
-                <!-- <div class="row trends-heading">
-                    <h3>Trends</h3>
-                </div> -->
             </div>
-            <div class="col" id="line-chart-2"></div>
-        </div>
-        <div class="row line-chart-wrapper">
-            <div class="col" id="line-chart-3"></div>
-            <div class="col" id="line-chart-4"></div>
-            <div class="col" id="line-chart-5"></div>
+            <div class="col bar-chart" id="bar-chart"></div>
         </div>
     </div>
         <div id="about" class="about row">
@@ -118,10 +117,6 @@
         </div>
         <form action="http://54.188.69.174:3000/tweets" method="POST"></form>
         <!-- <form action="http://localhost:3000/tweets" id="form" method="POST"></form> -->
-        </form>
-        <!-- <div>
-            <%= topics %>
-        </div> -->
     </body>
 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -133,19 +128,8 @@
     </script>
 </html>
 <script src="https://d3js.org/d3.v4.js"></script>
-    <script>
+<script>
     $(document).ready(function() {
-        // $( function() {
-        //     var handle = $( "#custom-handle" );
-        //     $( "#slider" ).slider({
-        //     create: function() {
-        //         handle.text( $( this ).slider( "value" ) );
-        //     },
-        //     slide: function( event, ui ) {
-        //         handle.text( ui.value );
-        //     }
-        //     });
-        // } );
 
         $('.search-button').click(function(){
             if (($(this).parent().prop('className') != 'search open')) {
@@ -168,9 +152,9 @@
             var h = lineChart.offsetHeight;
             var w = lineChart.offsetWidth;
             var margin = {top: 10, right: 30, bottom: 30, left: 80},
-            width = (w/1.2) - margin.left - margin.right,
+            width = (w/1.5) - margin.left - margin.right,
             height = h - margin.top - margin.bottom;
-
+            
             // append the svg object to the body of the page
             var chart = d3.select("#"+elementId)
             .append("svg")
@@ -182,13 +166,12 @@
             chart.append('text')
             .attr('class', 'label')
             .attr('x', -(height / 2))
-            // .attr('y', margin.top/ 2.4)
             .attr('transform', 'rotate(-90)')
             .attr('text-anchor', 'middle')
             .text('Number of Tweets')
             .attr('fill', '#00FEDE')
             .style('font-family', 'Helvetica Neue, Arial')
-            // .style('font-weight', 'bold')
+            .style('font-size', 'large')
             .style('font-style', 'italic')
 
             chart.append('text')
@@ -196,29 +179,20 @@
             .attr('x', width / 2 + margin.top)
             .attr('y', height + margin.top * 1.7)
             .attr('text-anchor', 'middle')
-            .text(xLabel + " Trends")
+            .text(xLabel.toUpperCase() + " Trends")
             .attr('fill', '#00FEDE')
             .style('font-family', 'Helvetica Neue, Arial')
-            // .style('font-weight', 'bold')
+            .style('font-size', 'large')
             .style('font-style', 'italic')
 
             var yScale = d3.scaleLinear()
             .range([height, 0])
-            .domain([0, d3.max(topics, function(d) { return d.value; })])
-            // .attr('fill', 'white')
-
-            // chart.append('g')
-            // .call(d3.axisLeft(yScale))
+            .domain([0, d3.max(topics, function(d) {return d.value; })])
 
             var xScale = d3.scaleBand()
             .range([0, width])
             .domain(topics.map((d) => d.name))
             .padding(0.2)
-
-            // chart.append('g')
-            // .attr('class', 'line')
-            // .attr('transform', `translate(0, ${height})`)
-            // .call(d3.axisBottom(xScale))
 
             var tooltip = d3.select("body")
             .append("div")
@@ -261,6 +235,17 @@
                 $('.search-button').click();
             });
 
+            var text = chart.selectAll(".text")  		
+            .data(topics)
+            .enter()
+            .append("text")
+            .attr("class","label")
+            .attr("x", function(d) { return xScale(d.name) })
+            .attr("y", function(d) { return yScale(d.value)-3 })
+            .html(function(d) { return d.name; })
+            .attr('fill', '#00FEDE')
+            .style('font-size', 'small') 
+
             chart.selectAll("rect")
             .transition()
             .duration(1000)
@@ -270,106 +255,77 @@
 
         }
 
-            // var topics = "<%= JSON.stringify(topics) %>"
-            var topics = "<%= topics %>"
-            // console.log(topics)
-            if (topics != ""){
-                topics = topics.replace(/&#34;/gi, "'")
-                topics = topics.replace(/\[+/g, "")
-                topics = topics.replace(/\]+/g, "")
-                topics = topics.replace(/\'+/g, "")
-                topics = topics.replace(/}/g, "")
-                topics = topics.replace(/{name:/g, "")
-                topics = topics.replace(/{/g, "")
-                topics = topics.replace(/volume:/g, "")
-                topics = topics.split(",")
+        var topics = "<%= topics %>"
+        // console.log(topics)
+        if (topics != ""){
+            topics = topics.replace(/&#34;/gi, "'")
+            topics = topics.replace(/\[+/g, "")
+            topics = topics.replace(/\]+/g, "")
+            topics = topics.replace(/\'+/g, "")
+            topics = topics.replace(/}/g, "")
+            topics = topics.replace(/{name:/g, "")
+            topics = topics.replace(/{/g, "")
+            topics = topics.replace(/volume:/g, "")
+            topics = topics.split(",")
+        }
+        var mx = 0;
+        for(let i=0; i<topics.length; i=i+2) {
+            if (mx < parseInt(topics[i+1])) {
+                mx = parseInt(topics[i+1])
             }
-            // console.log(topics)
-            var selected_array = "world";
-            var world_topics = new Array();
-            var india_topics = new Array();
-            var usa_topics = new Array();
-            var uk_topics = new Array();
-            var canada_topics = new Array();
-            for (let i=0; i<topics.length; i=i+2) {
-                // console.log(selected_array)
-                if (topics[i].includes(":")) {
-                    selected_array = topics[i].split(":")[0].toLowerCase();
-                    topics[i] = topics[i].split(":")[1]
-                }
-                switch(selected_array) {
-                    case "world":
-                        world_topics.push({"name":topics[i], "value": topics[i+1]});
-                        break;
-                    case "india":
-                        india_topics.push({"name":topics[i], "value": topics[i+1]});
-                        break;
-                    case "usa":
-                        usa_topics.push({"name":topics[i], "value": topics[i+1]});
-                        break;
-                    case "uk":
-                        uk_topics.push({"name":topics[i], "value": topics[i+1]});
-                        break;
-                    case "canada":
-                        canada_topics.push({"name":topics[i], "value": topics[i+1]});
-                        break;
-                    default:
-                        continue;
-                        break;
-                }
-            }
-            // console.log(world_topics)
-            // console.log(india_topics)
-            // console.log(usa_topics)
-            // console.log(uk_topics)
-            // console.log(canada_topics)
-
-
-            // var world_topics = new Array();
-            // for (let i=0;i<20;i=i+2) {
-            //     if (i == 0) {
-            //         topics[i] = topics[i].split(":")[1]
-            //     }
-            //     world_topics.push({"name":topics[i], "value": topics[i+1]})
-            // }
-            // var india_topics = new Array();
-            // for (let i=20;i<40;i=i+2) {
-            //     if (i == 20) {
-            //         topics[i] = topics[i].split(":")[1]
-            //     }
-            //     india_topics.push({"name":topics[i], "value": topics[i+1]})
-            // }
-            // var usa_topics = new Array();
-            // for (let i=40;i<60;i=i+2) {
-            //     if (i == 40) {
-            //         topics[i] = topics[i].split(":")[1]
-            //     }
-            //     usa_topics.push({"name":topics[i], "value": topics[i+1]})
-            // }
-            // var uk_topics = new Array();
-            // for (let i=60;i<80;i=i+2) {
-            //     if (i == 60) {
-            //         topics[i] = topics[i].split(":")[1]
-            //     }
-            //     uk_topics.push({"name":topics[i], "value": topics[i+1]})
-            // }
-            // var canada_topics = new Array();
-            // for (let i=80;i<100;i=i+2) {
-            //     if (i == 80) {
-            //         topics[i] = topics[i].split(":")[1]
-            //     }
-            //     canada_topics.push({"name":topics[i], "value": topics[i+1]})
-            // }
+        }
+        // console.log(mx.toString().length)
+        var selected_array = "world";
+        var world_topics = new Array();
+        var india_topics = new Array();
+        var usa_topics = new Array();
+        var uk_topics = new Array();
+        var canada_topics = new Array();
+        for (let i=0; i<topics.length; i=i+2) {
             
-            barChart(world_topics, "line-chart-1", "World")
-            barChart(india_topics, "line-chart-2", "India")
-            barChart(usa_topics, "line-chart-3", "USA")
-            barChart(uk_topics, "line-chart-4", "UK")
-            barChart(canada_topics, "line-chart-5", "Canada")
+            if (topics[i].includes(":")) {
+                selected_array = topics[i].split(":")[0].toLowerCase();
+                topics[i] = topics[i].split(":")[1]
+            }
+            switch(selected_array) {
+                case "world":
+                    world_topics.push({"name":topics[i], "value": parseInt(topics[i+1])});
+                    break;
+                case "india":
+                    india_topics.push({"name":topics[i], "value": parseInt(topics[i+1])});
+                    break;
+                case "usa":
+                    usa_topics.push({"name":topics[i], "value": parseInt(topics[i+1])});
+                    break;
+                case "uk":
+                    uk_topics.push({"name":topics[i], "value": parseInt(topics[i+1])});
+                    break;
+                case "canada":
+                    canada_topics.push({"name":topics[i], "value": parseInt(topics[i+1])});
+                    break;
+                default:
+                    continue;
+                    break;
+            }
+        }
+        barChart(world_topics, "bar-chart", "world")
 
-            })
-        
+        $(".select-buttons button").click(function(){
+            $(".bar-chart").empty()
+            if (this.value == "world")
+                barChart(world_topics, "bar-chart", this.value)
+            else if (this.value == "usa")
+                barChart(usa_topics, "bar-chart", this.value)
+            else if (this.value == "india")
+                barChart(india_topics, "bar-chart", this.value)
+            else if (this.value == "uk")
+                barChart(uk_topics, "bar-chart", this.value)
+            else if (this.value == "canada")
+                barChart(canada_topics, "bar-chart", this.value)
+        });
 
-    </script>
+    });
+
+</script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 

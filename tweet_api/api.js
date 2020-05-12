@@ -255,17 +255,12 @@ function trend_by_place ( trendsObject, woeid_arr, loc_arr, ind, callback ) {
         }
       }
       var result = ( trendsArray.sort( ( a, b ) => b.volume - a.volume ) ).slice( 0, 10 )
-      // var result = trendsArray.slice(0,10);
 
       trendsObject[ loc_arr[ ind ] ] = result
 
       trend_by_place( trendsObject, woeid_arr, loc_arr, ind + 1, callback )
     } ).catch(e => {
       console.log("Error in finding one")
-      // res.writeHead(400, {
-      //   "Content-Type": "text/plain"
-      // });
-      // res.end("internal sserver error");
     })
   }
 
